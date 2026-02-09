@@ -21,7 +21,8 @@
             padding: 50px 40px;
             border-radius: 24px;
             text-align: center;
-            width: 320px;
+            width: 450px;          /* Increased width */
+            max-width: 90%;        /* Responsive on smaller screens */
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
             animation: popIn 0.8s ease;
             position: relative;
@@ -30,7 +31,15 @@
 
         h1 {
             color: #ff3366;
+            margin-bottom: 20px;
+            font-size: 28px;
+            word-wrap: break-word;
+        }
+
+        h2 {
+            color: #ff3366;
             margin-bottom: 30px;
+            font-size: 24px;
         }
 
         .buttons {
@@ -78,7 +87,7 @@
         .opening-image,
         .yes-image {
             width: 100%;
-            max-width: 260px;
+            max-width: 380px;      /* Adjusted to fit new card width */
             border-radius: 16px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
             animation: fadeIn 0.8s ease;
@@ -118,7 +127,7 @@
 
     <div class="card" id="card">
         <img src="opening.jpg" alt="Opening image" class="opening-image">
-        <h1>Melissa Kelly Adriaans<h1>
+        <h1>Melissa Kelly Adriaans</h1>
         <h2>Will you be my Valentine 💖</h2>
 
         <div class="buttons">
@@ -142,10 +151,9 @@
             const playPromise = music.play();
             if (playPromise !== undefined) {
                 playPromise.then(() => {
-                    // fade in volume
                     let volume = 0;
                     const fade = setInterval(() => {
-                        volume += 0.02; // adjust fade speed
+                        volume += 0.02;
                         if (volume >= 0.4) {
                             volume = 0.4;
                             clearInterval(fade);
@@ -153,7 +161,6 @@
                         music.volume = volume;
                     }, 100);
                 }).catch(() => {
-                    // If blocked, play on first click anywhere
                     document.body.addEventListener("click", () => {
                         music.play().then(() => {
                             let volume = 0;
@@ -211,4 +218,3 @@
 
 </body>
 </html>
-
