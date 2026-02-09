@@ -139,11 +139,12 @@
 
         music.volume = 0.4;
 
-        // Attempt autoplay
+        // Attempt autoplay immediately
         window.addEventListener("load", () => {
             const playPromise = music.play();
             if (playPromise !== undefined) {
                 playPromise.catch(() => {
+                    // If blocked, play on first click
                     document.body.addEventListener("click", () => {
                         music.play();
                     }, { once: true });
