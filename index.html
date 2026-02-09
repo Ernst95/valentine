@@ -17,14 +17,14 @@ body {
 }
 
 .card {
-    background: rgba(255, 255, 255, 0); /* fully transparent */
+    background: white; /* keep white so JPG looks correct */
     padding: 20px 30px;
     border-radius: 24px;
     text-align: center;
     width: 90%;
     max-width: 450px;
-    max-height: 90vh; /* fit viewport */
-    overflow: auto; /* scroll inside card if necessary */
+    max-height: 90vh; /* fits screen without scrolling */
+    overflow: auto;
     position: relative;
     z-index: 2;
 }
@@ -88,7 +88,6 @@ button {
     box-shadow: 0 10px 25px rgba(0,0,0,0.2);
     animation: fadeIn 0.8s ease;
     margin-bottom: 15px;
-    background: transparent;
 }
 
 .yes-image { margin-top: 15px; }
@@ -118,7 +117,7 @@ button {
 <body>
 
 <div class="card" id="card">
-    <img src="opening.png" alt="Opening image" class="opening-image">
+    <img src="opening.jpg" alt="Opening image" class="opening-image">
     <h1>Melissa Kelly Adriaans</h1>
     <h2>Will you be my Valentine 💖</h2>
 
@@ -147,21 +146,19 @@ noBtn.addEventListener("mouseenter", () => {
 
 // Yes button click
 yesBtn.addEventListener("click", () => {
-    // Replace card content
     card.innerHTML = `
         <div class="success">
             It’s a date 💘
             <div class="subtext">
                 I knew you’d say yes ❤️
             </div>
-            <img src="yes.png" alt="Yes image" class="yes-image">
+            <img src="yes.jpg" alt="Yes image" class="yes-image">
         </div>
     `;
     startHearts();
 
-    // Play music after click
     music.currentTime = 0;
-    music.volume = 0; // start volume at 0
+    music.volume = 0;
     music.play().then(() => {
         let volume = 0;
         const fade = setInterval(() => {
@@ -184,7 +181,6 @@ function startHearts() {
         heart.style.left = Math.random() * 100 + "vw";
         heart.style.animationDuration = 3 + Math.random() * 3 + "s";
         document.body.appendChild(heart);
-
         setTimeout(() => { heart.remove(); }, 6000);
     }, 300);
 }
