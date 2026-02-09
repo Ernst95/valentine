@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Be My Valentine 💘</title>
+    <title>Melissa Kelly Adriaans will you <br> Be My Valentine? 💘</title>
 
     <style>
         body {
@@ -127,7 +127,7 @@
         </div>
     </div>
 
-    <audio id="bgMusic" autoplay loop>
+    <audio id="bgMusic" loop muted>
         <source src="music.mp3" type="audio/mpeg">
     </audio>
 
@@ -137,16 +137,35 @@
         const card = document.getElementById("card");
         const music = document.getElementById("bgMusic");
 
-        music.volume = 0.4;
-
-        // Attempt autoplay immediately
+        // Start muted and fade in
         window.addEventListener("load", () => {
             const playPromise = music.play();
             if (playPromise !== undefined) {
-                playPromise.catch(() => {
-                    // If blocked, play on first click
+                playPromise.then(() => {
+                    // fade in volume
+                    let volume = 0;
+                    const fade = setInterval(() => {
+                        volume += 0.02; // adjust fade speed
+                        if (volume >= 0.4) {
+                            volume = 0.4;
+                            clearInterval(fade);
+                        }
+                        music.volume = volume;
+                    }, 100);
+                }).catch(() => {
+                    // If blocked, play on first click anywhere
                     document.body.addEventListener("click", () => {
-                        music.play();
+                        music.play().then(() => {
+                            let volume = 0;
+                            const fade = setInterval(() => {
+                                volume += 0.02;
+                                if (volume >= 0.4) {
+                                    volume = 0.4;
+                                    clearInterval(fade);
+                                }
+                                music.volume = volume;
+                            }, 100);
+                        });
                     }, { once: true });
                 });
             }
